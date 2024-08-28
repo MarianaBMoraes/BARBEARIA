@@ -65,6 +65,126 @@ app.delete("/servico/:id", (req, res) => {
 
 // GERENCIAMENTO DE SERVIÇOS
 
+// GERENCIAMENTO DE CLIENTES
+app.post("/cliente", (req, res) => {
+  const cliente = req.body;
+  const code = cliente_controller.store(cliente);
+  res.status(code).json();
+});
+
+app.get("/cliente", (req, res) => {
+  const clientes = cliente_controller.index();
+  res.json(clientes);
+});
+
+app.get("/cliente/:id", (req, res) => {
+  const cliente = cliente_controller.show(req.params.id);
+  res.json(cliente);
+});
+
+app.put("/cliente/:id", (req, res) => {
+  const cliente = req.body;
+  const code = cliente_controller.update(req.params.id, cliente);
+  res.status(code).json();
+});
+
+app.delete("/cliente/:id", (req, res) => {
+  cliente_controller.destroy(req.params.id);
+  res.json();
+});
+// GERENCIAMENTO DE CLIENTES
+
+// GERENCIAMENTO DE BARBEIROS
+app.post("/barbeiro", (req, res) => {
+  const barbeiro = req.body;
+  const code = barbeiro_controller.store(barbeiro);
+  res.status(code).json();
+});
+
+app.get("/barbeiro", (req, res) => {
+  const barbeiros = barbeiro_controller.index();
+  res.json(barbeiros);
+});
+
+app.get("/barbeiro/:id", (req, res) => {
+  const barbeiro = barbeiro_controller.show(req.params.id);
+  res.json(barbeiro);
+});
+
+app.put("/barbeiro/:id", (req, res) => {
+  const barbeiro = req.body;
+  const code = barbeiro_controller.update(req.params.id, barbeiro);
+  res.status(code).json();
+});
+
+app.delete("/barbeiro/:id", (req, res) => {
+  barbeiro_controller.destroy(req.params.id);
+  res.json();
+});
+
+// GERENCIAMENTO DE BARBEIROS
+
+// GERENCIAMENTO DE BARBEARIAS
+app.post("/barbearia", (req, res) => {
+  const barbearia = req.body;
+  const code = barbearia_controller.store(barbearia);
+  res.status(code).json();
+});
+
+app.get("/barbearia", (req, res) => {
+  const barbearias = barbearia_controller.index();
+  res.json(barbearias);
+});
+
+app.get("/barbearia/:id", (req, res) => {
+  const barbearia = barbearia_controller.show(req.params.id);
+  res.json(barbearia);
+});
+
+app.put("/barbearia/:id", (req, res) => {
+  const barbearia = req.body;
+  const code = barbearia_controller.update(req.params.id, barbearia);
+  res.status(code).json();
+});
+
+app.delete("/barbearia/:id", (req, res) => {
+  barbearia_controller.destroy(req.params.id);
+  res.json();
+});
+
+// GERENCIAMENTO DE BARBEARIAS
+
+// GERENCIAMENTO DE BARBEARIAS
+app.post("/barbearia", (req, res) => {
+  const barbearia = req.body;
+  const code = barbearia_controller.store(barbearia);
+  res.status(code).json();
+});
+
+app.get("/barbearia", (req, res) => {
+  const barbearias = barbearia_controller.index();
+  res.json(barbearias);
+});
+
+app.get("/barbearia/:id", (req, res) => {
+  const barbearia = barbearia_controller.show(req.params.id);
+  res.json(barbearia);
+});
+
+app.put("/barbearia/:id", (req, res) => {
+  const barbearia = req.body;
+  const code = barbearia_controller.update(req.params.id, barbearia);
+  res.status(code).json();
+});
+
+app.delete("/barbearia/:id", (req, res) => {
+  barbearia_controller.destroy(req.params.id);
+  res.json();
+});
+
+// GERENCIAMENTO DE BARBEARIAS
+
+
 app.listen(port, () => {
   console.log("Gerenciador de baralho executando na porta: " + port);
 });
