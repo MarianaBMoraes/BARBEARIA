@@ -1,61 +1,45 @@
-const servico_controller = require("./servico.js");
+const model = require("../models/atendimento.js")
 
-const db = [];
-let nextId = 1;
+const db = []
 
-const model = (atendimento, id = nextId++) => {
-  if (
-    atendimento.nome != undefined &&
-    atendimento.nome != "" &&
-    atendimento.servico_id != undefined //
-    // servico_controller.show(atendimento.servico_id)
-  )
-    return {
-      id,
-      nome: atendimento.nome,
-      servico_id: atendimento.servico_id,
-    };
-};
+const index = () => db
+
+const show = id => db.find(el => el.id == id)
 
 const store = (body) => {
-  const novo = model(body);
+    const novo = model(body)
 
-  if (novo) {
-    db.push(novo);
-    return 201;
-  }
+    if (novo) {
+        db.push(novo)
+        return 201
+    }
 
-  return 400;
-};
+    return 400
+}
 
-const index = () => db;
+const update = (body, id) => {
+    const novo = model(body, parseInt(id))
+    const indice = db.findIndex(el => el.id == id)
 
-const show = (id) => db.find((el) => el.id == id);
+    if (novo && indice != -1) {
+        db[indice] = novo
+        return 200
+    }
 
-const update = (id, body) => {
-  const index = db.findIndex((el) => el.id == id);
-  const novo = model(body, parseInt(id));
+    return 400
+}
 
-  if (novo && index != -1) {
-    db[index] = novo;
-
-    return 200;
-  }
-
-  return 400;
-};
-
-const destroy = (id) => {
-  const index = db.findIndex((el) => el.id == id);
-  if (index != -1) {
-    db.splice(index, 1);
-  }
-};
+const destroy = id => {
+    const indice = db.findIndex(el => el.id == id)
+    if (indice != -1) {
+        db.splice(indice, 1)
+    }
+}
 
 module.exports = {
-  store,
-  index,
-  show,
-  update,
-  destroy,
-};
+    index,
+    show,
+    store,
+    update,
+    destroy
+}
