@@ -1,23 +1,25 @@
-let proxId = 1
+const barbearia_controller = require("../controllers/barbearia.js")
 
-const model = (boby, id = nextId++) => {
-  
-    if (
-      body.data > 0 &&
-      body.hora > 0 &&
-      body.filme_id != undefined &&
-      body.sala_id != undefined &&
-      filme_controller.show(body.filme_id) &&
-      sala_controller.show(body.sala_id) &&
-      body.cadeiras && validarCadeiras(body.cadeiras)
+let proxId = 1;
+
+const model = (body, id = proxId++) => {
+    if(
+        body.nome != undefined &&
+        body.bio != undefined &&
+        body.foto != undefined &&
+        body.nome != "" &&
+        body.bio != "" &&
+        body.foto != "" &&
+        barbearia_controller.show(body.barbearia_id)
     ) {
-      return {
-        id,
-        data: body.data,
-        hora: body.hora,
-        filme_id: body.filme_id,
-        sala_id: body.sala_id,
-        cadeiras: body.cadeiras
-      };
+        return {
+            id,
+            nome: body.nome,
+            foto: body.foto,
+            bio: body.bio,
+            barbearia_id: body.barbearia_id
+        }
     }
-  };
+}
+
+module.exports = model
