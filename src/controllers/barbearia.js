@@ -1,45 +1,24 @@
-const model = require("../models/barbearia.js")
+const rede_controller = require("../controllers/rede.js")
 
-const db = []
+let proxId = 1;
 
-const index = () => db
-
-const show = id => db.find(el => el.id == id)
-
-const store = (body) => {
-    const novo = model(body)
-
-    if (novo) {
-        db.push(novo)
-        return 201
-    }
-
-    return 400
-}
-
-const update = (body, id) => {
-    const novo = model(body, parseInt(id))
-    const indice = db.findIndex(el => el.id == id)
-
-    if (novo && indice != -1) {
-        db[indice] = novo
-        return 200
-    }
-
-    return 400
-}
-
-const destroy = id => {
-    const indice = db.findIndex(el => el.id == id)
-    if (indice != -1) {
-        db.splice(indice, 1)
+const model = (body, id = proxId++) => {
+    if(
+        body.nome != undefined &&
+        body.fotos != undefined &&
+        body.nome != "" &&
+        Array.isArray(body.fotos) &&
+        body.fotos.every(el => el != "") &&
+        rede_controller.show(body.rede_id)
+    ) {
+        return {
+            id,
+            nome: body.nome,
+            fotos: body.fotos,
+            endereco: body.endereco,
+            rede_id: body.rede_id
+        }
     }
 }
 
-module.exports = {
-    index,
-    show,
-    store,
-    update,
-    destroy
-}
+module.exports = model
