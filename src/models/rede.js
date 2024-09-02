@@ -1,19 +1,19 @@
-const usuario_controller = require("./usuario.js");
-let nextId = 1;
+const usuario_controller = require("../controllers/usuario.js")
 
-const model = (body, id = nextId++) => {
-  if (
-    rede.nome != undefined &&
-    rede.nome != "" &&
-    rede.usuario_id != undefined &&
-    rede.usuario_id != undefined &&
-    usuario_controller.show(rede.usuario_id)
-  )
-    return {
-      id,
-      nome: rede.nome,
-      usuario_id: rede.usuario_id,
-    };
-};
+let proxId = 1;
 
-module.exports = model;
+const model = (body, id = proxId++) => {
+    if(
+        body.nome != undefined &&
+        body.nome != "" &&
+        usuario_controller.show(body.usuario_id)
+    ) {
+        return {
+            id,
+            nome: body.nome,
+            usuario_id: body.usuario_id
+        }
+    }
+}
+
+module.exports = model
